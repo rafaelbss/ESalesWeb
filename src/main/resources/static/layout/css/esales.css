@@ -1,0 +1,12 @@
+.es-field-action {
+	display: flex;
+	
+}
+
+.es-field-action-icon {
+	margin: 6px 0 0 5px;
+}
+
+.glyphicon-large {
+	font-size: 18px;
+}
