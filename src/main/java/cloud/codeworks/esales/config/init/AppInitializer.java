@@ -5,14 +5,15 @@ import javax.servlet.Filter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import cloud.codeworks.esales.config.JPAConfig;
+import cloud.codeworks.esales.config.ServiceConfig;
 import cloud.codeworks.esales.config.WebConfig;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Class<?>[] { JPAConfig.class, ServiceConfig.class };
 	}
 
 	@Override

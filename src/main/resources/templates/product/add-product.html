@@ -17,39 +17,37 @@
 				</div>
 		
 				<div class="container-fluid">
-		
-					<!-- <div class="alert  alert-danger  alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<i class="fa  fa-exclamation-circle"></i> Já existe um produto com o nome informado.
-					</div> -->
+				
+					<th:block th:include="message/success"></th:block>
 		
 					<form method="POST" th:object="${product}" class="form-vertical  js-form-loading">
+					
+						<th:block th:include="message/error"></th:block>
 				
 						<div class="row">
 							<div class="col-sm-2  form-group">
 								<label for="sku">SKU</label>
-								<input id="sku" type="text" class="form-control"/>
+								<input id="sku" type="text" class="form-control" th:field="*{sku}" />
 							</div>
 							
 							<div class="col-sm-10  form-group">
 								<label for="name">Name</label>
-								<input id="name" type="text" class="form-control"/>
+								<input id="name" type="text" class="form-control" th:field="*{name}" />
 							</div>
 						</div>
 			
 						<div class="form-group">
 							<label for="description">Description</label>
-							<textarea id="description" rows="3" class="form-control"></textarea>
+							<textarea id="description" rows="3" class="form-control" th:field="*{description}"></textarea>
 						</div>
 		
 						<div class="row">
 							<div class="col-sm-6  form-group">
 								<label for="type">Type</label>
 								<div class="es-field-action">
-									<select id="type" class="form-control">
+									<select id="type" class="form-control" th:field="*{type}">
 										<option value="">Select type</option>
-										<option value="1">Book</option>
-										<option value="1">Computer</option>
+										<option th:each="productType : ${productType}" th:value="${productType.code}" th:text="${productType.name}">Book</option>
 									</select>
 									
 									<div class="es-field-action-icon">
@@ -64,21 +62,21 @@
 								<label for="price">Price</label>
 								<div class="input-group">
 									<div class="input-group-addon">$</div>
-									<input id="price" type="text" class="form-control js-decimal"/>
+									<input id="price" type="text" class="form-control js-decimal" th:field="*{value}" />
 								</div>
 							</div>
 							
 							<div class="col-sm-2  form-group">
 								<label for="commission">Commission</label>
 								<div class="input-group">
-									<input id="commission" type="text" class="form-control js-decimal"/>
+									<input id="commission" type="text" class="form-control js-decimal" th:field="*{commission}" />
 									<div class="input-group-addon">%</div>
 								</div>
 							</div>
 							
 							<div class="col-sm-2  form-group">
 								<label for="stock">Stock</label>
-								<input id="stock" type="text" class="form-control js-plain" placeholder="Unity"/>
+								<input id="stock" type="text" class="form-control js-plain" placeholder="Unity" th:field="*{quantityStock}" />
 							</div>
 						</div>
 						
@@ -86,14 +84,12 @@
 							<div class="col-lg-3  col-sm-12  form-group">
 								<label for="origin">Origin</label>
 								<div>
-									<div class="radio  radio-inline">
-										<input type="radio" name="origin"> 
-										<label>National</label>
-									</div>
-									<div class="radio  radio-inline">
-										<input type="radio" name="origin"> 
-										<label>International</label>
-									</div>
+									<th:block th:each="origin : ${origin}">
+										<div class="radio  radio-inline">
+											<input th:id="|id_${origin}|" th:value="${origin}" type="radio" th:field="*{origin}"> 
+											<label th:for="|id_${origin}|" th:text="${origin.description}"></label>
+										</div>
+									</th:block>
 								</div>
 							</div>
 						</div>
